@@ -1,24 +1,21 @@
 import {
     Box,
     Button,
-    Checkbox,
     Container,
     Divider,
-    FormControl,
-    FormLabel,
     Heading,
     HStack,
-    Input,
     Stack,
     Text,
     useBreakpointValue,
     useColorModeValue,
   } from '@chakra-ui/react'
   import * as React from 'react'
+import { NavLink } from 'react-router-dom'
+import { Inputsigin } from '../Input'
   import { Logo } from '../Logo'
   import { OAuthButtonGroup } from '../OAuthButtonGroup'
-  import { PasswordField } from '../PasswordField'
-  
+
   export const Create = () => (
     <Container
       maxW="lg"
@@ -47,13 +44,15 @@ import {
                 md: 'sm',
               })}
             >
-              Log in to your account
+              Create account
             </Heading>
             <HStack spacing="1" justify="center">
-              <Text color="muted">Don't have an account?</Text>
-              <Button variant="link" colorScheme="blue">
-                Sign up
-              </Button>
+            <Text color="muted">Do have an account?</Text>
+            <NavLink to="/">
+            <Button variant="link" colorScheme="blue">
+              Sign in
+            </Button>
+            </NavLink>
             </HStack>
           </Stack>
         </Stack>
@@ -81,20 +80,9 @@ import {
         >
           <Stack spacing="6">
             <Stack spacing="5">
-              <FormControl>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Input id="email" type="email" />
-              </FormControl>
-              <PasswordField />
+              <Inputsigin/>
             </Stack>
-            <HStack justify="space-between">
-              <Checkbox defaultChecked>Remember me</Checkbox>
-              <Button variant="link" colorScheme="blue" size="sm">
-                Forgot password?
-              </Button>
-            </HStack>
             <Stack spacing="6">
-              <Button variant="primary">Sign in</Button>
               <HStack>
                 <Divider />
                 <Text fontSize="sm" whiteSpace="nowrap" color="muted">

@@ -1,20 +1,20 @@
 import {
+  Button,
     FormControl,
     FormLabel,
     IconButton,
     Input,
     InputGroup,
     InputRightElement,
-    useDisclosure,
-    useMergeRefs,
-    Box,
     Stack,
+    useDisclosure,
+    useMergeRefs
  
   } from '@chakra-ui/react'
   import * as React from 'react'
   import { HiEye, HiEyeOff } from 'react-icons/hi'
   import { useForm } from './../Hooks/useForm';
-import { OAuthButtonGroup } from './OAuthButtonGroup';
+  import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
   export const PasswordField = React.forwardRef((props, ref) => {
     const { isOpen, onToggle } = useDisclosure()
@@ -24,17 +24,29 @@ import { OAuthButtonGroup } from './OAuthButtonGroup';
       email: '',
       password: '',
   })
-  console.log(formValues)
- /* const handleGoogle = () => {
-     dispatch(loginGogle())
-     const handleSubmit = (e) => {
-      e.preventDefault();
-      
+  const onClicksumit = () => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, formValues.email, formValues.password)
+    
+    
+  .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+    console.log(user)
+    reset()
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    console.log(errorCode)
+    const errorMessage = error.message;
+    console.log(errorMessage)
+    alert('email o contraseña incorrectos')
+  });
+
   }
-  }*/
-  
     const onClickReveal = () => {
-      reset()
+      
       onToggle()
   
       if (inputRef.current) {
@@ -44,7 +56,6 @@ import { OAuthButtonGroup } from './OAuthButtonGroup';
         })
       }
     }
-
   
     return (
       < >
@@ -75,18 +86,13 @@ import { OAuthButtonGroup } from './OAuthButtonGroup';
             required
             {...props}
           />
+          
         </InputGroup>
+        <Stack spacing="6">
+            <Button onClick={onClicksumit} variant="primary">Sign in</Button>
+          </Stack>
       </FormControl>
       </form>
-      <Stack spacing="8">
-      <Box>
-        <Stack spacing="6">
-          <Stack spacing="5">
-            <OAuthButtonGroup />
-          </Stack>
-        </Stack>
-      </Box>
-    </Stack>
       </>
     )
   })

@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  Checkbox,
+
   Container,
   Divider,
   Heading,
@@ -12,8 +12,10 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import * as React from 'react'
+import { NavLink } from 'react-router-dom';
 import { Logo } from '../Logo'
 import { PasswordField } from '../PasswordField'
+import { OAuthButtonGroup } from './../OAuthButtonGroup';
 
 
 export const LogIn = () => (
@@ -49,9 +51,11 @@ export const LogIn = () => (
           </Heading>
           <HStack spacing="1" justify="center">
             <Text color="muted">Don't have an account?</Text>
+            <NavLink to="/registrer">
             <Button variant="link" colorScheme="blue">
               Sign up
             </Button>
+            </NavLink>
           </HStack>
         </Stack>
       </Stack>
@@ -81,14 +85,7 @@ export const LogIn = () => (
           <Stack spacing="5">
             <PasswordField />
           </Stack>
-          <HStack justify="space-between">
-            <Checkbox defaultChecked>Remember me</Checkbox>
-            <Button variant="link" colorScheme="blue" size="sm">
-              Forgot password?
-            </Button>
-          </HStack>
           <Stack spacing="6">
-            <Button variant="primary">Sign in</Button>
             <HStack>
               <Divider />
               <Text fontSize="sm" whiteSpace="nowrap" color="muted">
@@ -96,6 +93,7 @@ export const LogIn = () => (
               </Text>
               <Divider />
             </HStack>
+            <OAuthButtonGroup />
           </Stack>
         </Stack>
       </Box>
