@@ -1,31 +1,17 @@
-import { Box } from '@chakra-ui/react';
 import React from 'react';
-import { getAuth, signOut } from "firebase/auth";
+import Mentores from '../components/Home/Mentores'
+import Monitoria from '../components/Home/Monitoria'
+import Btncerrarseccion from '../components/Home/Cerrarseccion'
+import CreateMentor from '../components/Home/CreateMentor'
+import CreateMonitoria from '../components/Home/CreateMonitoria'
 function Home() {
-    const cerrarseccion = () => {
-        const auth = getAuth();
-        signOut(auth).then(() => {
-        // Sign-out successful.
-        }).catch((error) => {
-        // An error happened.
-        });
-    }
     return (
         <div>
-            <Box 
-            onClick={cerrarseccion}
-            as='button'
-            p={4}
-            color='white'
-            fontWeight='bold'
-            borderRadius='md'
-            bgGradient='linear(to-r, teal.500, green.500)'
-            _hover={{
-                bgGradient: 'linear(to-r, red.500, yellow.500)',
-            }}
-            >
-            Cerrar seccion
-            </Box>
+            <CreateMonitoria/>
+            <CreateMentor/>
+            <Btncerrarseccion/>
+            <Mentores/>
+            <Monitoria/>
         </div>
     );
 }
