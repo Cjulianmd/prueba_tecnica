@@ -4,12 +4,14 @@ import Monitoria from '../components/Home/Monitoria'
 import Btncerrarseccion from '../components/Home/Cerrarseccion'
 import CreateMentor from '../components/Home/CreateMentor'
 import CreateMonitoria from '../components/Home/CreateMonitoria'
+import Search from '../components/Home/filtrosearch'
 function Home() {
     return (
         <div>
+            <Btncerrarseccion/>
             <CreateMonitoria/>
             <CreateMentor/>
-            <Btncerrarseccion/>
+            <Search/>
             <Mentores/>
             <Monitoria/>
         </div>

@@ -20,7 +20,6 @@ import { useForm } from './../../Hooks/useForm';
 export default function Createmonitoria() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
-
     const [formValues, handleInputChange, reset] = useForm({
       Materia: '',
       fecha: '',
@@ -30,13 +29,13 @@ export default function Createmonitoria() {
 
     const createMentor = () => {
       return () => {
-         
           addDoc(collection(db, "monitorias"),formValues) 
           console.log(formValues)
-
+          
           reset()
+          //
       }
-  }
+    }
   
     return (
         <>

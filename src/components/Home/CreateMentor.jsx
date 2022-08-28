@@ -36,8 +36,8 @@ export default function Creatementor() {
          
           addDoc(collection(db, "monitores"),formValues) 
           console.log(formValues)
-
           reset()
+
       }
   }
   

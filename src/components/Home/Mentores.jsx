@@ -11,9 +11,12 @@ import {
     TableCaption,
     TableContainer,
   } from '@chakra-ui/react'
+
 function Mentores() {
     const [products, setProducts] = useState([])
+
     useEffect(() => {
+
         const mentor = async() =>{
          try{
              const querySnapshot = await getDocs(collection(db, "monitores"))
@@ -22,17 +25,19 @@ function Mentores() {
              docs.push({...doc.data(), id: doc.id})
              } )
              setProducts(docs)
+             console.log(products)
+             //window.location.reload()
          }catch(error){
              console.log(error)
          }
-
+        
         }
         mentor()
-     }, [])
-    
+     },[])
+  
     return (
         
-        <div>
+        <>
             {products.map(({name,apellido,cedula,información_de_contacto,semestre,programa_académico}) => (
             <LinkBox as='article' maxW='sm' p='5' borderWidth='1px' rounded='md'>
                 <TableContainer>
@@ -70,8 +75,9 @@ function Mentores() {
             )
             )}
             
-        </div>
+        </>
     );
+    
 }
 
 export default Mentores;
