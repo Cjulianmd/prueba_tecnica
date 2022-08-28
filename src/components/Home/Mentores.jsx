@@ -33,7 +33,7 @@ function Mentores() {
         
         }
         mentor()
-     },[])
+     },[products])
   
     return (
         

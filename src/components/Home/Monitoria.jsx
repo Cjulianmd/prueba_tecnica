@@ -28,7 +28,7 @@ function Monitoria() {
 
         }
         mentor()
-     }, [])
+     }, [products])
     
     return (
         
