@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+Description:
+
+A university wishes to systematize its monitoring program, which is led by a monitoring coordinator in charge of directing the monitors.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
