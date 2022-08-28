@@ -7,7 +7,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
 describe('firebase', () => {
 
     test('firebase db', () => {
-        expect(db).toBe( getFirestore(app));
+        expect(db).toBe(getFirestore(app));
     })
 
 });

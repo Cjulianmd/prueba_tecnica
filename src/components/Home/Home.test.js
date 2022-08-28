@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
 import '@testing-library/jest-dom/extend-expect'
-import { prettyDOM, render, screen } from '@testing-library/react';
+import { fireEvent, prettyDOM, render, screen } from '@testing-library/react';
 import { getDocs } from 'firebase/firestore';
 import CreateMonitoria from './CreateMonitoria'
-import Mentores from './Mentores'
+import Mentores from './Cerrarseccion'
 
 describe('fHome', () => {
     const component = render(<CreateMonitoria/>)
@@ -12,12 +12,17 @@ describe('fHome', () => {
     console.log(prettyDOM(component.container))
     console.log(prettyDOM(component2.container))
     component.getByText('Crear monitorias')
+    component2.getByText('Cerrar seccion')
 
     test('CreateMonitoria', () => {
         expect(component.container).toHaveTextContent('Crear monitorias')
     }) 
     test('CreateMonitoria2', () => {
-        //expect(component.container).key('null')
+        expect(component2.container).toHaveTextContent('Crear monitorias')
+    }) 
+    test('CreateMonitoria2', () => {
+        const button = component.getByText('Crear monitorias')
+        fireEvent.click(button)
     }) 
 
 });
