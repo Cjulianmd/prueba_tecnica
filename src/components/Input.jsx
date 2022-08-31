@@ -16,17 +16,17 @@ import { HiEye, HiEyeOff } from 'react-icons/hi'
 import { useForm } from './../Hooks/useForm';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-export const Inputsigin = React.forwardRef((props, ref) => {
-  const { isOpen, onToggle } = useDisclosure()
-  const inputRef = React.useRef(null)
-  const mergeRef = useMergeRefs(inputRef, ref)
-  const [formValues, handleInputChange, reset] = useForm({
-    name: '',
-    lastName: '',
-    phone:'',
-    email: '',
-    password: '',
-})
+  export const Inputsigin = React.forwardRef((props, ref) => {
+    const { isOpen, onToggle } = useDisclosure()
+    const inputRef = React.useRef(null)
+    const mergeRef = useMergeRefs(inputRef, ref)
+    const [formValues, handleInputChange, reset] = useForm({
+      name: '',
+      lastName: '',
+      phone:'',
+      email: '',
+      password: '',
+  })
 
   const onClickReveal = () => {
     
@@ -40,8 +40,6 @@ export const Inputsigin = React.forwardRef((props, ref) => {
     }
   }
   const onClicksumit = () => {
-    
-
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, formValues.email, formValues.password)
         .then((userCredential) => {
