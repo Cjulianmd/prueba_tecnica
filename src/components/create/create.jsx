@@ -43,11 +43,12 @@ import { Inputsigin } from '../Input'
                 base: 'xs',
                 md: 'sm',
               })}
+              color='white'
             >
               Create account
             </Heading>
             <HStack spacing="1" justify="center">
-            <Text color="muted">Do have an account?</Text>
+            <Text color='white'>Do have an account?</Text>
             <NavLink to="/">
             <Button variant="link" colorScheme="blue">
               Sign in
@@ -85,7 +86,7 @@ import { Inputsigin } from '../Input'
             <Stack spacing="6">
               <HStack>
                 <Divider />
-                <Text fontSize="sm" whiteSpace="nowrap" color="muted">
+                <Text color='white' fontSize="sm" whiteSpace="nowrap">
                   or continue with
                 </Text>
                 <Divider />

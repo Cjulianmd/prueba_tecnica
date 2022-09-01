@@ -46,12 +46,13 @@ export const LogIn = () => (
               base: 'xs',
               md: 'sm',
             })}
+            color='white'
           >
             Log in to your account
           </Heading>
-          <NavLink to="/registrer">
+          <NavLink to="/register">
           <HStack spacing="1" justify="center">
-            <Text color="muted">Don't have an account?</Text>
+            <Text color='white'>Don't have an account?</Text>
             
             <Button variant="link" colorScheme="blue">
               Sign up
@@ -89,7 +90,7 @@ export const LogIn = () => (
           <Stack spacing="6">
             <HStack>
               <Divider />
-              <Text fontSize="sm" whiteSpace="nowrap" color="muted">
+              <Text fontSize="sm" whiteSpace="nowrap" color='white'>
                 or continue with
               </Text>
               <Divider />

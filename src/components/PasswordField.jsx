@@ -61,11 +61,11 @@ import {
       < >
       <form >
       <FormControl>
-        <FormLabel htmlFor="email">Email</FormLabel>
-        <Input onChange={handleInputChange} value={formValues.email} id="email" name="email" type="email" />
+        <FormLabel color='white' htmlFor="email">Email</FormLabel>
+        <Input color='white' onChange={handleInputChange} value={formValues.email} id="email" name="email" type="email" />
       </FormControl>
       <FormControl>
-        <FormLabel htmlFor="password">Password</FormLabel>
+        <FormLabel color='white' htmlFor="password">Password</FormLabel>
         <InputGroup>
           <InputRightElement>
             <IconButton
@@ -76,6 +76,7 @@ import {
             />
           </InputRightElement>
           <Input
+            color='white'
             onChange={handleInputChange} 
             value={formValues.password}
             id="password"
@@ -88,8 +89,9 @@ import {
           />
           
         </InputGroup>
+        <br/>
         <Stack spacing="6">
-            <Button onClick={onClicksumit} variant="primary">Sign in</Button>
+            <Button onClick={onClicksumit} color='mute' >Sign in</Button>
           </Stack>
       </FormControl>
       </form>

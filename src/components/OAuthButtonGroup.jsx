@@ -13,6 +13,39 @@ const providers = [
   },
 ]
 const auth = getAuth();
+    const onClickFace = () => {
+          signInWithPopup(auth, face)
+          .then((result) => {
+            // The signed-in user info.
+            const user = result.user;
+
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            const credential = FacebookAuthProvider.credentialFromResult(result);
+            const accessToken = credential.accessToken;
+            console.log(accessToken)
+            console.log(user);
+
+            // ...
+          })
+          .catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            console.log(errorCode)
+            const errorMessage = error.message;
+            console.log(errorMessage)
+            // The email of the user's account used.
+            const email = error.customData.email;
+            console.log(email)
+            // The AuthCredential type that was used.
+            const credential = FacebookAuthProvider.credentialFromError(error);
+            console.log(credential)
+            const user = error.customData;
+            console.log(user);
+
+        // ...
+      });
+
+        }
     const onClickGogle = () => {
       signInWithPopup(auth, google)
       .then((result) => {
@@ -39,39 +72,7 @@ const auth = getAuth();
         // ...
       });
     }
-    const onClickFace = () => {
-      signInWithPopup(auth, face)
-      .then((result) => {
-        // The signed-in user info.
-        const user = result.user;
-
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const credential = FacebookAuthProvider.credentialFromResult(result);
-        const accessToken = credential.accessToken;
-        console.log(accessToken)
-        console.log(user);
-
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        console.log(errorCode)
-        const errorMessage = error.message;
-        console.log(errorMessage)
-        // The email of the user's account used.
-        const email = error.customData.email;
-        console.log(email)
-        // The AuthCredential type that was used.
-        const credential = FacebookAuthProvider.credentialFromError(error);
-        console.log(credential)
-        const user = error.customData;
-        console.log(user);
-
-    // ...
-  });
-
-    }
+    
     
 
 export const OAuthButtonGroup = () => (
@@ -80,9 +81,9 @@ export const OAuthButtonGroup = () => (
         <VisuallyHidden>Sign in with {providers[0].name}</VisuallyHidden>
         {providers[0].icon}
       </Button>
-    <Button onClick={onClickFace} key={providers[1].name} width="full">
+    <Button color='white' onClick={onClickFace} key={providers[1].name} width="full">
         <VisuallyHidden>Sign in with {providers[1].name}</VisuallyHidden>
-        {providers[1].icon}
+        f
     </Button>
   </ButtonGroup>
-)
+) 

@@ -63,23 +63,23 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
     < >
     <form >
     <FormControl>
-      <FormLabel htmlFor="email">Email</FormLabel>
-      <Input onChange={handleInputChange} value={formValues.email} id="email" name="email" type="email" />
+      <FormLabel color='white' htmlFor="email">Email</FormLabel>
+      <Input color='white' onChange={handleInputChange} value={formValues.email} id="email" name="email" type="email" />
     </FormControl>
     <FormControl>
-      <FormLabel htmlFor="phone">Telefono</FormLabel>
-      <Input onChange={handleInputChange} value={formValues.phone} id="phone" name="phone" type="number" />
+      <FormLabel color='white' htmlFor="phone">Telefono</FormLabel>
+      <Input color='white' onChange={handleInputChange} value={formValues.phone} id="phone" name="phone" type="number" />
     </FormControl>
     <FormControl>
-      <FormLabel htmlFor="name">nombres</FormLabel>
-      <Input onChange={handleInputChange} value={formValues.name} id="name" name="name" type="text" />
+      <FormLabel color='white' htmlFor="name">nombres</FormLabel>
+      <Input color='white' onChange={handleInputChange} value={formValues.name} id="name" name="name" type="text" />
     </FormControl>
     <FormControl>
-      <FormLabel htmlFor="lastName">apellidos</FormLabel>
-      <Input onChange={handleInputChange} value={formValues.lastName} id="lastName" name="lastName" type="text" />
+      <FormLabel color='white' htmlFor="lastName">apellidos</FormLabel>
+      <Input color='white' onChange={handleInputChange} value={formValues.lastName} id="lastName" name="lastName" type="text" />
     </FormControl>
     <FormControl>
-      <FormLabel htmlFor="password">Password</FormLabel>
+      <FormLabel color='white' htmlFor="password">Password</FormLabel>
       <InputGroup>
         <InputRightElement>
           <IconButton
@@ -90,6 +90,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
           />
         </InputRightElement>
         <Input
+          color='white'
           onChange={handleInputChange} 
           value={formValues.password}
           id="password"
@@ -103,7 +104,8 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
       </InputGroup>
     </FormControl>
     <Stack spacing="6">
-      <Button onClick={onClicksumit} variant="primary">create</Button>
+    <br/>
+      <Button onClick={onClicksumit} color='mute'>create</Button>
     </Stack >
     </form>
     </>
