@@ -4,16 +4,14 @@ import Monitoria from '../components/Home/Monitoria'
 import Btncerrarseccion from '../components/Home/Cerrarseccion'
 import CreateMentor from '../components/Home/CreateMentor'
 import CreateMonitoria from '../components/Home/CreateMonitoria'
-import Search from '../components/Home/filtrosearch'
 function Home() {
+    document.body.style = 'background: #1F233E; '
     return (
         <div>
             <Btncerrarseccion/>
             <CreateMonitoria/>
             <CreateMentor/>
-            <Search/>
-            <Mentores/>
-            <Monitoria/>
+            <Mentores/><Monitoria/>
         </div>
     );
 }

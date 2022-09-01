@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { LinkBox, Button, WrapItem, Stack } from '@chakra-ui/react';
+import { LinkBox, Button, WrapItem, Stack, Center } from '@chakra-ui/react';
 import React from 'react';
 import { db } from '../../FireBase/Firebaseconfig';
+import { useForm } from './../../Hooks/useForm';
 import {
     Table,
     Tbody,
@@ -10,8 +11,7 @@ import {
     TableCaption,
     TableContainer,
   } from '@chakra-ui/react'
-  import { collection, query, onSnapshot, limit, startAt, doc, deleteDoc, getDoc, setDoc, addDoc } from "firebase/firestore";
-  import { orderBy } from "firebase/firestore";
+  import { collection, query, onSnapshot,  doc, deleteDoc, getDoc, setDoc, addDoc, where } from "firebase/firestore";
   import {
       Drawer,
       DrawerBody,
@@ -20,15 +20,23 @@ import {
       DrawerOverlay,
       DrawerContent,
       DrawerCloseButton,
+      Box
     } from '@chakra-ui/react'
 import {
-  Input,
+  Input,Text,
   useDisclosure,
+  } from '@chakra-ui/react'
+  import {
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
   } from '@chakra-ui/react'
 function Mentores() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
-        const valorInicial = {
+    const valorInicial = {
         name: '',
         apellido: '',
         información_de_contacto:'',
@@ -36,25 +44,65 @@ function Mentores() {
         semestre: '',
         cedula: '',
     }
+
+    const [formValue, handleInputChange] = useForm({
+        busqueda: '',
+        apellido: '',
+        programa_académico: '',
+        semestre: '',
+        cedula: '',
+    })
+    
+
+
     const [products, setProducts] = useState([])
     const [subId, setSubId] = useState('')
     const [user, setUser] = useState(valorInicial)
     const citiesRef = query(collection(db, "monitores"))
-    const q = query(citiesRef, orderBy("name"), limit(2), startAt(""));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    const docs = []
-    const cities = []
+    //q
+    let q;
+    q = query(citiesRef, );
+    //filtro  
+    //const filters = () => {
+        if (formValue.busqueda == "" && formValue.apellido == "" && formValue.programa_académico == "" && formValue.semestre == "" && formValue.cedula == "") {
+            q = query(citiesRef,)
+            }else if (formValue.busqueda !== "" && formValue.apellido == '' && formValue.programa_académico == "" && formValue.semestre == "" && formValue.cedula == "") {
+                q = query(citiesRef, where("name", "==", formValue.busqueda))
+                }else if (formValue.busqueda == "" && formValue.apellido !== '' && formValue.programa_académico == "" && formValue.semestre == "" && formValue.cedula == "") {
+                    q = query(citiesRef, where("apellido", "==", formValue.apellido))
+                    }else if (formValue.busqueda == "" && formValue.apellido == '' && formValue.programa_académico !== "" && formValue.semestre == "" && formValue.cedula == "") {
+                        q = query(citiesRef, where("programa_académico", "==", formValue.programa_académico))
+                        }else if (formValue.busqueda == "" && formValue.apellido == '' && formValue.programa_académico == "" && formValue.semestre !== "" && formValue.cedula == "") {
+                            q = query(citiesRef, where("semestre", "==", formValue.semestre))
+                            }else if (formValue.busqueda == "" && formValue.apellido == '' && formValue.programa_académico == "" && formValue.semestre == "" && formValue.cedula !== "") {
+                                q = query(citiesRef, where("cedula", "==", formValue.cedula))
+                            }
+        if (formValue.busqueda !== "" && formValue.apellido !== '' && formValue.programa_académico !== "" && formValue.semestre !== "" && formValue.cedula !== "") {
+                                q = query(citiesRef,where("name", "==", formValue.busqueda),where("apellido", "==", formValue.apellido),where("programa_académico", "==", formValue.programa_académico),where("semestre", "==", formValue.semestre), where("cedula", "==", formValue.cedula))
+        }
+        if (formValue.busqueda !== "" && formValue.apellido !== ''){
+            q = query(citiesRef, where("name", "==", formValue.busqueda),where("apellido", "==", formValue.apellido))
+        }
+           
+        
+    //unsubscribe()}
 
-    querySnapshot.forEach((doc) => {
-        cities.push(doc.data().name);
-        docs.push({...doc.data(), id: doc.id})
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const docs = []
+        //const cities = []
+        querySnapshot.forEach((doc) => {
+            //cities.push(doc.data());
+            docs.push({...doc.data(), id: doc.id})
+        });
+        setProducts(docs)
     });
-    setProducts(docs)
-    });
+
+
+
     const deleteMonitor = async(id) => {
         await deleteDoc(doc(db, "monitores", id));
-        console.log(id)
     }
+
 
     const capturarInputs = (e)=>{
         const {name, value} = e.target
@@ -96,16 +144,36 @@ function Mentores() {
         setUser({...valorInicial})
         setSubId('')
     }
-
+   
     return (
         
+        <>
+        <Accordion width='500px'>
+            <AccordionItem>
+                <h2>
+                <AccordionButton>
+                    <Box color='white' flex='1' textAlign='left'>
+                     Fliltro Monitores
+                    </Box>
+                    <AccordionIcon />
+                </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                    <Input color='white' htmlSize={50} width='auto' placeholder='nombre' onChange={handleInputChange} value={formValue.busqueda} id="busqueda" name="busqueda" type="text" />
+                    <Input color='white' htmlSize={50} width='auto' placeholder='apellido' onChange={handleInputChange} value={formValue.apellido} id="apellido" name="apellido" type="text" />
+                    <Input color='white' htmlSize={50} width='auto' placeholder='programa_académico' onChange={handleInputChange} value={formValue.programa_académico} id="programa_académico" name="programa_académico" type="text" />
+                    <Input color='white' htmlSize={50} width='auto' placeholder='semestre' onChange={handleInputChange} value={formValue.semestre} id="semestre" name="semestre" type="number" />
+                    <Input color='white' htmlSize={50} width='auto' placeholder='cedula' onChange={handleInputChange} value={formValue.cedula} id="cedula" name="cedula" type="number" /> 
+                </AccordionPanel>
+            </AccordionItem>
+        </Accordion>
         <>
             {products.map(({name,apellido,cedula,información_de_contacto,semestre,programa_académico,id}) => (
             <LinkBox key={id} valueas='article' maxW='sm' p='3' borderWidth='1px' rounded='md'>
                 <TableContainer >
                 <Table variant='simple'>
-                    <TableCaption>Monitor</TableCaption>
-                    <Tbody>
+                    <TableCaption color='white'>Monitor</TableCaption>
+                    <Tbody color='white'>
                     <Tr>
                         <Td>Nombres</Td>
                         <Td>{name}</Td>
@@ -174,7 +242,7 @@ function Mentores() {
             </LinkBox>
             )
             )}
-            
+            </>
         </>
     );
     

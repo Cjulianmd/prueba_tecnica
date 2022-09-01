@@ -49,14 +49,15 @@ export const LogIn = () => (
           >
             Log in to your account
           </Heading>
+          <NavLink to="/registrer">
           <HStack spacing="1" justify="center">
             <Text color="muted">Don't have an account?</Text>
-            <NavLink to="/registrer">
+            
             <Button variant="link" colorScheme="blue">
               Sign up
             </Button>
-            </NavLink>
-          </HStack>
+           
+          </HStack> </NavLink>
         </Stack>
       </Stack>
       <Box

@@ -1,7 +1,8 @@
 import { useEffect,useState } from "react";
-import { Button, LinkBox, Stack, WrapItem } from '@chakra-ui/react';
+import { Button, LinkBox, Stack, WrapItem, Center } from '@chakra-ui/react';
 import React from 'react';
 import { db } from '../../FireBase/Firebaseconfig';
+import { useForm } from './../../Hooks/useForm';
 import {
     Table,
     Tbody,
@@ -10,7 +11,7 @@ import {
     TableCaption,
     TableContainer,
   } from '@chakra-ui/react'
-  import { collection, query, onSnapshot, doc, deleteDoc, getDoc, setDoc, addDoc } from "firebase/firestore";
+  import { collection, query, onSnapshot, doc, deleteDoc, getDoc, setDoc, addDoc, where } from "firebase/firestore";
   import {
       Drawer,
       DrawerBody,
@@ -24,6 +25,15 @@ import {
   Input,
   useDisclosure,
   } from '@chakra-ui/react'
+  import {TcontainerM } from './../../style/style';
+  import { 
+  Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+    Box
+  } from '@chakra-ui/react'
 function Monitoria() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
@@ -33,10 +43,36 @@ function Monitoria() {
             monitor:'',
             salon: '',
     }
+    const [formValue, handleInputChange] = useForm({
+        Materia: '',
+        fecha: '',
+        monitor:'',
+        salon: '',
+    })
+    
     const [subId, setSubId] = useState('')
     const [user, setUser] = useState(valorInicial)
     const [products, setProducts] = useState([])
-    const q = query(collection(db, "monitorias"))
+    const citiesRef = query(collection(db, "monitorias"))
+        //q
+        let q;
+        q = query(citiesRef, );
+        //filtro  
+        //const filters = () => {
+            if (formValue.Materia == "" && formValue.monitor == "") {
+                q = query(citiesRef,)
+            }else if (formValue.Materia !== "" && formValue.monitor == '') {
+                q = query(citiesRef, where("Materia", "==", formValue.Materia))
+            }
+            if (formValue.Materia == "" && formValue.monitor !== ''){
+                q = query(citiesRef, where("monitor", "==", formValue.monitor))
+            }
+            if (formValue.Materia !== "" && formValue.monitor !== ''){
+                q = query(citiesRef, where("Materia", "==", formValue.Materia),where("monitor", "==", formValue.monitor))
+            }
+               
+            
+        //unsubscribe()}
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const docs = []
     const cities = []
@@ -50,7 +86,6 @@ function Monitoria() {
     
     const deleteMonitoria = async(id) => {
         await deleteDoc(doc(db, "monitorias", id));
-        console.log(id)
     }
     const capturarInputs = (e)=>{
         const {name, value} = e.target
@@ -95,13 +130,31 @@ function Monitoria() {
     
     return (
         
-        <div>
+        <>
+        <TcontainerM>
+        <Accordion  width='500px' >
+            <AccordionItem>
+                <h2>
+                <AccordionButton>
+                    <Box color='white' flex='1' textAlign='left'>
+                     Fliltro Monitoria (presione aqui)
+                    </Box>
+                    <AccordionIcon />
+                </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                    <Input color='white' width='400px' htmlSize={50} placeholder='Materia' onChange={handleInputChange} value={formValue.Materia} id="Materia" name="Materia" type="text" />
+                    <Input color='white' width='400px' htmlSize={50} placeholder='monitor' onChange={handleInputChange} value={formValue.monitor} id="monitor" name="monitor" type="text" />
+                </AccordionPanel>
+            </AccordionItem>
+        </Accordion>
+        
             {products.map(({Materia,fecha,monitor,salon,id}) => (
             <LinkBox key={id} as='article' maxW='sm' p='6' borderWidth='1px' rounded='md'  >
                 <TableContainer >
                 <Table variant='simple'>
-                    <TableCaption>Monitoria</TableCaption>
-                    <Tbody>
+                    <TableCaption color='white' >Monitoria</TableCaption>
+                    <Tbody color='white' >
                     <Tr>
                         <Td>Materia</Td>
                         <Td>{Materia}</Td>
@@ -160,8 +213,8 @@ function Monitoria() {
             </LinkBox>
             )
             )}
-            
-        </div>
+            </TcontainerM>
+        </>
     );
 }
 
