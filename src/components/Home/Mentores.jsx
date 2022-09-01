@@ -33,6 +33,7 @@ import {
     AccordionPanel,
     AccordionIcon,
   } from '@chakra-ui/react'
+import { TcontainerM2 } from '../../style/style';
 function Mentores() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
@@ -147,13 +148,13 @@ function Mentores() {
    
     return (
         
-        <>
+        <TcontainerM2>
         <Accordion width='500px'>
             <AccordionItem>
                 <h2>
                 <AccordionButton>
                     <Box color='white' flex='1' textAlign='left'>
-                     Fliltro Monitores
+                     Fliltro Monitores (presione aqui)
                     </Box>
                     <AccordionIcon />
                 </AccordionButton>
@@ -167,8 +168,9 @@ function Mentores() {
                 </AccordionPanel>
             </AccordionItem>
         </Accordion>
-        <>
+        <><br/>
             {products.map(({name,apellido,cedula,información_de_contacto,semestre,programa_académico,id}) => (
+                
             <LinkBox key={id} valueas='article' maxW='sm' p='3' borderWidth='1px' rounded='md'>
                 <TableContainer >
                 <Table variant='simple'>
@@ -240,10 +242,11 @@ function Mentores() {
                 </DrawerContent>
                 </Drawer>
             </LinkBox>
+            
             )
-            )}
+        )}<br/>
             </>
-        </>
+        </TcontainerM2>
     );
     
 }

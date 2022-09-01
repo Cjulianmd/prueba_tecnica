@@ -148,7 +148,7 @@ function Monitoria() {
                 </AccordionPanel>
             </AccordionItem>
         </Accordion>
-        
+        <br/>
             {products.map(({Materia,fecha,monitor,salon,id}) => (
             <LinkBox key={id} as='article' maxW='sm' p='6' borderWidth='1px' rounded='md'  >
                 <TableContainer >
